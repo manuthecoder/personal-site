@@ -185,7 +185,7 @@ function Navbar() {
         ...(!trigger && {
           opacity: 0,
         }),
-        background: "hsla(240,11%,15%,0.9)",
+        background: "hsla(240,11%,20%,0.9)",
         borderRadius: 4,
         m: "20px",
         zIndex: 999999,
