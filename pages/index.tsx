@@ -10,6 +10,7 @@ import { Twitter, Github, Instagram, Linkedin } from "feather-icons-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { Features } from "../components/Features";
 
 function Header() {
   const ref = useRef(null);
@@ -177,6 +178,7 @@ function Navbar() {
     <AppBar
       position="fixed"
       sx={{
+        backdropFilter: "blur(10px)",
         transition: "all .2s",
         top: !trigger ? "-100px" : "20px",
         ...(!trigger && {
@@ -220,7 +222,7 @@ export default function Page() {
     <>
       <Header />
       <Navbar />
-      <Box sx={{ height: "400vh" }} />
+      <Features />
       asdf
     </>
   );

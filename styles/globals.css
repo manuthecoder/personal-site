@@ -90,3 +90,67 @@ body {
     margin-top: 5px;
   }
 }
+
+/* Features */
+
+body {
+  --black: #000000;
+  --ash-black: #222;
+  --white: #fafafa;
+  --sky: #00ccff;
+  --green: #22dddd;
+  --blue: #1300ff;
+  --dusk: #6600ff;
+  --purple: #9900ff;
+  --pink: #ff0066;
+  --red: #fe0222;
+  --orange: #fd7702;
+  --yellow: #ffbb00;
+
+  --background: var(--black);
+  --accent: var(--red);
+}
+
+.progress {
+  position: sticky;
+  top: 200px;
+  width: 80px;
+  height: 80px;
+  padding: 0;
+  margin-right: auto;
+}
+
+.progress svg {
+  transform: translateX(-100px) rotate(-90deg);
+}
+
+circle {
+  stroke-dashoffset: 0;
+  stroke-width: 5%;
+  fill: none;
+}
+
+.bg {
+  stroke: var(--accent);
+  opacity: 0.2;
+}
+
+.progress .indicator {
+  stroke: var(--accent);
+}
+
+section {
+  height: 100vh;
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+
+section .item {
+  width: 100%;
+  flex-grow: 1;
+  height: 500px;
+  max-height: 100vh;
+  border: 2px dotted var(--accent);
+}
