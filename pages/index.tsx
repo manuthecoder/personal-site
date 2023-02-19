@@ -1,3 +1,4 @@
+import { ParallaxText } from "@/components/ParallaxText";
 import {
   AppBar,
   Box,
@@ -161,7 +162,7 @@ function Header() {
 
 function Navbar() {
   const trigger = useScrollTrigger({
-    threshold: window ? window.innerHeight : 0,
+    threshold: typeof window !== "undefined" ? window.innerHeight : 0,
     disableHysteresis: true,
   });
 
@@ -184,9 +185,10 @@ function Navbar() {
         ...(!trigger && {
           opacity: 0,
         }),
-        background: "rgba(0,0,0,0.1)",
+        background: "hsla(240,11%,15%,0.9)",
         borderRadius: 4,
         m: "20px",
+        zIndex: 999999,
         width: "calc(100vw - 40px)",
       }}
       elevation={0}
@@ -222,8 +224,8 @@ export default function Page() {
     <>
       <Header />
       <Navbar />
+      <ParallaxText />
       <Features />
-      asdf
     </>
   );
 }
