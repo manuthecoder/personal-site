@@ -1,6 +1,9 @@
-import { ParallaxText } from "@/components/ParallaxText";
+import { AboutMe } from "@/components/AboutMe";
+import { Awards } from "@/components/Awards";
+import { Footer } from "@/components/Footer";
 import {
   AppBar,
+  IconButton,
   Box,
   Button,
   Toolbar,
@@ -98,7 +101,13 @@ function Header() {
                 flexDirection: "column",
               }}
             >
-              <Typography variant="h1" className="font-heading">
+              <Typography
+                variant="h1"
+                className="font-heading"
+                sx={{
+                  fontSize: "10vw",
+                }}
+              >
                 @_manu.codes
               </Typography>
               <Typography
@@ -174,6 +183,7 @@ function Navbar() {
     borderRadius: 999,
     px: 2,
     transition: "none",
+    display: { xs: "none", sm: "inline-flex" },
   };
   return (
     <AppBar
@@ -181,15 +191,18 @@ function Navbar() {
       sx={{
         backdropFilter: "blur(10px)",
         transition: "all .2s",
+        width: "auto",
         top: !trigger ? "-100px" : "20px",
         ...(!trigger && {
           opacity: 0,
         }),
-        background: "hsla(240,11%,20%,0.9)",
+        background: "hsla(240,11%,25%,0.9)",
         borderRadius: 4,
         m: "20px",
         zIndex: 999999,
-        width: "calc(100vw - 40px)",
+        transform: "translateX(-50%)",
+        left: "50%",
+        right: "unset",
       }}
       elevation={0}
     >
@@ -198,22 +211,26 @@ function Navbar() {
           justifyContent: "center",
         }}
       >
-        <Typography
-          sx={{ fontWeight: 500, flexGrow: 1 }}
-          className="font-heading"
-          variant="h6"
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          whileTap={{
+            scale: 0.9,
+            borderRadius: "100%",
+          }}
         >
-          @_manu.codes
-        </Typography>
-        <Button color="inherit" sx={buttonStyles}>
-          Projects
-        </Button>
-        <Button color="inherit" sx={buttonStyles}>
-          Contact
-        </Button>
-        <Button color="inherit" sx={buttonStyles}>
-          Blog
-        </Button>
+          <Typography
+            onClick={() => {
+              window.navigator.share({
+                url: window.location.href,
+              });
+            }}
+            sx={{ fontWeight: 500, flexGrow: 1 }}
+            className="font-heading"
+            variant="h6"
+          >
+            @_manu.codes
+          </Typography>
+        </motion.div>
       </Toolbar>
     </AppBar>
   );
@@ -224,8 +241,10 @@ export default function Page() {
     <>
       <Header />
       <Navbar />
-      <ParallaxText />
+      <AboutMe />
       <Features />
+      <Awards />
+      <Footer />
     </>
   );
 }

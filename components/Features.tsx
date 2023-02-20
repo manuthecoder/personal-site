@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { useTransform, motion, useScroll } from "framer-motion";
 import { Chip, Divider, Box, Button, Grid, Typography } from "@mui/material";
-import { ParallaxTextItem } from "./ParallaxText";
 import { Masonry } from "@mui/lab";
 
 function Item({ project }: any) {
@@ -62,6 +61,7 @@ function Item({ project }: any) {
           />
         ))}
         <Button
+          target="_blank"
           href={project.url}
           sx={{
             gap: 2,
@@ -135,7 +135,7 @@ export function Features() {
   const ref = useRef();
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["-200px end", "-200px start"],
+    offset: ["-50px end", "-50px start"],
   });
   const scaleFromTopCenter = useTransform(scrollYProgress, [0, 1], [0.5, 1]);
 
@@ -151,7 +151,7 @@ export function Features() {
           scale: scaleFromTopCenter,
         }}
       >
-        <Masonry columns={2} spacing={0}>
+        <Masonry columns={{ xs: 1, sm: 2 }} spacing={0}>
           {projects.map((project) => (
             <Item project={project} key={project.name} />
           ))}

@@ -17,10 +17,7 @@ interface ParallaxProps {
   baseVelocity: number;
 }
 
-export function ParallaxTextItem({
-  children,
-  baseVelocity = 100,
-}: ParallaxProps) {
+export function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -65,85 +62,17 @@ export function ParallaxTextItem({
    * we have four children (100% / 4). This would also want deriving from the
    * dynamically generated number of children.
    */
+  const styles = {};
+
   return (
     <div className="parallax">
       <motion.div className="scroller" style={{ x }}>
-        <Typography className="font-serif" variant="h3">
-          {children}{" "}
-        </Typography>
-        <Typography className="font-serif" variant="h3">
-          {children}{" "}
-        </Typography>
-        <Typography className="font-serif" variant="h3">
-          {children}{" "}
-        </Typography>
-        <Typography className="font-serif" variant="h3">
-          {children}{" "}
-        </Typography>
+        {[...new Array(100)].map((_, i) => (
+          <Typography variant="h3" key={i} sx={styles}>
+            {children}{" "}
+          </Typography>
+        ))}
       </motion.div>
     </div>
-  );
-}
-
-export function ParallaxText() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["-200px end", "-200px start"],
-  });
-
-  return (
-    <Box sx={{ zIndex: 999, position: "relative" }}>
-      <Typography
-        variant="h3"
-        className="font-serif"
-        sx={{ px: 5, my: 10, mb: 0 }}
-      >
-        About me
-      </Typography>
-      <Box
-        sx={{
-          p: { xs: 3, sm: 5 },
-          pt: 0,
-          mt: -3,
-          // textAlign: "center",
-          "& u": {
-            display: "inline-flex",
-            flexDirection: "column",
-            textDecoration: "none",
-            fontWeight: "600",
-          },
-        }}
-        ref={ref}
-      >
-        <Typography variant="h4" sx={{ mt: 3 }}>
-          I&apos;m a full-stack software enthusiast experienced with{" "}
-          <u>
-            React
-            <motion.div
-              className="progress-bar"
-              style={{ scaleX: scrollYProgress }}
-            />
-          </u>
-          ,{" "}
-          <u>
-            TypeScript
-            <motion.div
-              className="progress-bar"
-              style={{ scaleX: scrollYProgress }}
-            />
-          </u>
-          ,{" "}
-          <u>
-            SQL
-            <motion.div
-              className="progress-bar"
-              style={{ scaleX: scrollYProgress }}
-            />
-          </u>
-          , and a few more.
-        </Typography>
-      </Box>
-    </Box>
   );
 }

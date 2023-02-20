@@ -144,5 +144,19 @@ section {
 .parallax .MuiTypography-root {
   display: block;
   margin-right: 30px;
-  min-width: 50vw;
+}
+
+/* Ripple */
+
+.MuiTouchRipple-rippleVisible {
+  animation-duration: 0.25s !important;
+}
+.MuiTouchRipple-child {
+  filter: opacity(0.3) !important;
+  background: #000;
+}
+
+.rippleDark .MuiTouchRipple-child,
+.dark .MuiTouchRipple-child {
+  background: radial-gradient(#fff, #000) !important;
 }
