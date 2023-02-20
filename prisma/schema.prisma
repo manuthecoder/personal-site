@@ -10,9 +10,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Guestbook {
+model GuestBook {
   id String @unique @id @default(uuid())
   name String
-  email String
-  picture String
+  email String @unique
+  image String
 }

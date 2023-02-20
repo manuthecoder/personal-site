@@ -10,6 +10,7 @@ import {
   IconButton,
   Box,
   SwipeableDrawer,
+  Divider,
   Button,
   ListItemButton,
   Avatar,
@@ -25,11 +26,26 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Features } from "../components/Features";
 import { useSession, signIn, signOut } from "next-auth/react";
+import useSWR from "swr";
 
 function Guestbook() {
   const [open, setOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const { data: session } = useSession();
+  const { data, error, isLoading } = useSWR("/api/guestbook", () =>
+    fetch("/api/guestbook").then((res) => res.json())
+  );
+
+  const handleAddClick = () => {
+    fetch("/api/guestbook/add", {
+      method: "POST",
+      body: JSON.stringify({
+        name: session.user.name,
+        email: session.user.email,
+        image: session.user.image,
+      }),
+    });
+  };
 
   return (
     <>
@@ -120,6 +136,7 @@ function Guestbook() {
                   <ListItemSecondaryAction>
                     <Button
                       variant="contained"
+                      onClick={handleAddClick}
                       color="inherit"
                       sx={{
                         color: "#000",
@@ -168,6 +185,31 @@ function Guestbook() {
                 </span>
               </Button>
             )}
+            <Divider sx={{ borderColor: "hsla(240,11%,30%,0.5)", my: 5 }} />
+            {!isLoading &&
+              data &&
+              !error &&
+              data.map((user) => (
+                <ListItemButton
+                  key={user}
+                  sx={{
+                    gap: 2,
+                    cursor: "unset",
+                    background: "hsl(240,11%,15%)!important",
+                    mb: 2,
+                    borderRadius: 3,
+                  }}
+                  disableRipple
+                >
+                  <Avatar src={user.image} />
+                  <ListItemText
+                    primary={user.name}
+                    secondary={
+                      <span style={{ color: "#aaa" }}>{user.email}</span>
+                    }
+                  />
+                </ListItemButton>
+              ))}
           </Box>
         </Box>
       </SwipeableDrawer>
