@@ -52,12 +52,12 @@ function Header() {
     scrollYProgress,
     [0, 0.2, 0.4, 0.6, 0.8, 1],
     [
-      "inset 0px 0px 0px 5px hsla(240, 11%, 10%, 0.1), inset 0px 0px 0px 5px hsla(240, 11%, 10%, 0.1)",
-      "inset 0px 0px 0px 5px hsla(240, 11%, 10%, 0.4), inset 0px 0px 0px 5px hsla(240, 11%, 10%, 0.4)",
-      "inset 0px 0px 0px 5px hsla(240, 11%, 10%, 0.4), inset 0px 0px 0px 5px hsla(240, 11%, 10%, 0.4)",
-      "inset 0px 0px 0px 5px hsla(240, 11%, 10%, 0.4), inset 0px 0px 0px 5px hsla(240, 11%, 10%, 0.4)",
-      "inset 0px 0px 0px 5px hsla(240, 11%, 10%, 0.4), inset 0px 0px 0px 5px hsla(240, 11%, 10%, 0.4)",
-      "inset 0px 0px 0px 5px hsla(240, 11%, 10%, 0.4), inset 0px 0px 0px 5px hsla(240, 11%, 10%, 0.4)",
+      "inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.3), inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.3)",
+      "inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4), inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4)",
+      "inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4), inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4)",
+      "inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4), inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4)",
+      "inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4), inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4)",
+      "inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4), inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4)",
     ]
   );
   // Use the scrollYProgress to animate the x and y position of the shine effect
@@ -84,7 +84,7 @@ function Header() {
                 rotate: 45,
                 left: "-100vw",
                 background:
-                  "linear-gradient(90deg, hsla(240, 11%, 10%, 0) 0%, hsla(240, 11%, 90%, 0.5) 50%, hsla(240, 11%, 90%, 0) 100%)",
+                  "linear-gradient(90deg, hsla(240, 11%, 10%, 0) 0%, #fff, 50%, hsla(240, 11%, 90%, 0) 100%)",
                 opacity: 0.8,
                 x: shineX,
               }}

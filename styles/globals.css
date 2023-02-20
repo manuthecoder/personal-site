@@ -1,11 +1,12 @@
 :root {
-  --bg-color: hsl(240, 11%, 15%);
+  --bg-color: hsl(240, 11%, 10%);
 }
 body {
-  background: linear-gradient(var(--bg-color), hsl(240, 11%, 15%));
+  background: linear-gradient(var(--bg-color), hsl(240, 11%, 10%));
   margin: 0;
   color: #fff;
   overflow-x: hidden;
+  user-select: none;
 }
 * {
   box-sizing: border-box;
@@ -35,7 +36,7 @@ body {
 .item {
   width: 90vw; /* Set the width of the item */
   height: 500px; /* Set the height of the item */
-  border-radius: 28px;
+  border-radius: 10px;
 }
 
 .container.hidden {
@@ -50,7 +51,7 @@ body {
   top: 5px;
   left: 5px;
   background: var(--bg-color);
-  border-radius: 23px;
+  border-radius: 10px;
   height: calc(100% - 10px);
   width: calc(100% - 10px);
   padding: 28px;
@@ -59,6 +60,8 @@ body {
 *:not(
     .font-heading,
     .font-heading *,
+    .font-serif,
+    .font-serif *,
     .material-symbols-outlined,
     .material-symbols-outlined *
   ) {
@@ -68,6 +71,10 @@ body {
 .font-heading,
 .font-heading * {
   font-family: "Space Grotesk", sans-serif !important;
+}
+.font-serif,
+.font-serif * {
+  font-family: "DM Serif Display", serif !important;
 }
 
 .material-symbols-outlined {
@@ -104,52 +111,6 @@ body {
 
 /* Features */
 
-body {
-  --black: #000000;
-  --ash-black: #222;
-  --white: #fafafa;
-  --sky: #00ccff;
-  --green: #22dddd;
-  --blue: #1300ff;
-  --dusk: #6600ff;
-  --purple: #9900ff;
-  --pink: #ff0066;
-  --red: #fe0222;
-  --orange: #fd7702;
-  --yellow: #ffbb00;
-
-  --background: var(--black);
-  --accent: var(--red);
-}
-
-.progress {
-  position: sticky;
-  top: 200px;
-  width: 80px;
-  height: 80px;
-  padding: 0;
-  margin-right: auto;
-}
-
-.progress svg {
-  transform: translateX(-100px) rotate(-90deg);
-}
-
-circle {
-  stroke-dashoffset: 0;
-  stroke-width: 5%;
-  fill: none;
-}
-
-.bg {
-  stroke: var(--accent);
-  opacity: 0.2;
-}
-
-.progress .indicator {
-  stroke: var(--accent);
-}
-
 section {
   height: 100vh;
   display: flex;
@@ -180,8 +141,8 @@ section {
   flex-wrap: nowrap;
 }
 
-.parallax span {
+.parallax .MuiTypography-root {
   display: block;
   margin-right: 30px;
-  width: 50vw;
+  min-width: 50vw;
 }

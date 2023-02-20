@@ -10,14 +10,17 @@ import {
   useAnimationFrame,
 } from "framer-motion";
 import { wrap } from "@motionone/utils";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 interface ParallaxProps {
   children: string;
   baseVelocity: number;
 }
 
-function ParallaxTextItem({ children, baseVelocity = 100 }: ParallaxProps) {
+export function ParallaxTextItem({
+  children,
+  baseVelocity = 100,
+}: ParallaxProps) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -65,26 +68,82 @@ function ParallaxTextItem({ children, baseVelocity = 100 }: ParallaxProps) {
   return (
     <div className="parallax">
       <motion.div className="scroller" style={{ x }}>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
+        <Typography className="font-serif" variant="h3">
+          {children}{" "}
+        </Typography>
+        <Typography className="font-serif" variant="h3">
+          {children}{" "}
+        </Typography>
+        <Typography className="font-serif" variant="h3">
+          {children}{" "}
+        </Typography>
+        <Typography className="font-serif" variant="h3">
+          {children}{" "}
+        </Typography>
       </motion.div>
     </div>
   );
 }
 
 export function ParallaxText() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["-200px end", "-200px start"],
+  });
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        //   background: "red",
-      }}
-    >
-      <ParallaxTextItem baseVelocity={-2}>About me</ParallaxTextItem>
-      <ParallaxTextItem baseVelocity={2}>What do I do?</ParallaxTextItem>
+    <Box sx={{ zIndex: 999, position: "relative" }}>
+      <Typography
+        variant="h3"
+        className="font-serif"
+        sx={{ px: 5, my: 10, mb: 0 }}
+      >
+        About me
+      </Typography>
+      <Box
+        sx={{
+          p: { xs: 3, sm: 5 },
+          pt: 0,
+          mt: -3,
+          // textAlign: "center",
+          "& u": {
+            display: "inline-flex",
+            flexDirection: "column",
+            textDecoration: "none",
+            fontWeight: "600",
+          },
+        }}
+        ref={ref}
+      >
+        <Typography variant="h4" sx={{ mt: 3 }}>
+          I&apos;m a full-stack software enthusiast experienced with{" "}
+          <u>
+            React
+            <motion.div
+              className="progress-bar"
+              style={{ scaleX: scrollYProgress }}
+            />
+          </u>
+          ,{" "}
+          <u>
+            TypeScript
+            <motion.div
+              className="progress-bar"
+              style={{ scaleX: scrollYProgress }}
+            />
+          </u>
+          ,{" "}
+          <u>
+            SQL
+            <motion.div
+              className="progress-bar"
+              style={{ scaleX: scrollYProgress }}
+            />
+          </u>
+          , and a few more.
+        </Typography>
+      </Box>
     </Box>
   );
 }
