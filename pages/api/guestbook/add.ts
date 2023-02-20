@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next";
 import authOptions from "../auth/[...nextauth]";
 
 export default async function handler(req: any, res: any) {
-  const session = await getServerSession(req, res, authOptions);
+  const session: any = await getServerSession(req, res, authOptions);
   if (!session || !session.user) {
     res.json({ error: "Please sign in" });
     return;
