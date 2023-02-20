@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { AboutMe } from "@/components/AboutMe";
 import { Awards } from "@/components/Awards";
 import { Footer } from "@/components/Footer";
@@ -17,7 +19,8 @@ import { useEffect, useRef, useState } from "react";
 import { Features } from "../components/Features";
 
 function Header() {
-  const ref = useRef(null);
+  const ref: any = useRef(null);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],

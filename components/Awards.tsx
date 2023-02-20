@@ -11,7 +11,7 @@ import {
 } from "framer-motion";
 
 export function Awards() {
-  const ref = useRef(null);
+  const ref: any = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["100px end", "-200px start"],

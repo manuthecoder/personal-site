@@ -4,7 +4,8 @@ import { Chip, Divider, Box, Button, Grid, Typography } from "@mui/material";
 import { Masonry } from "@mui/lab";
 
 function Item({ project }: any) {
-  const ref = useRef(null);
+  const ref: any = useRef(null);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["end end", "start start"],
@@ -48,7 +49,7 @@ function Item({ project }: any) {
           </Typography>
         </Box>
         <Typography sx={{ fontWeight: 100 }}>{project.description}</Typography>
-        {project.labels.map((label) => (
+        {project.labels.map((label: any) => (
           <Chip
             label={label}
             key={label}
@@ -132,7 +133,7 @@ export function Features() {
       deprecated: true,
     },
   ];
-  const ref = useRef();
+  const ref: any = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["-50px end", "-50px start"],

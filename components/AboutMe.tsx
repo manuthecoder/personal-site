@@ -13,7 +13,7 @@ import { wrap } from "@motionone/utils";
 import { Box, Typography } from "@mui/material";
 
 export function AboutMe() {
-  const ref = useRef(null);
+  const ref:any = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["-200px end", "-200px start"],
