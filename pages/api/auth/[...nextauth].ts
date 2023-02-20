@@ -17,16 +17,16 @@ export default NextAuth({
   },
   providers: [
     GithubProvider({
-      clientId: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
+      clientId: process.env.CLIENT_ID as any,
+      clientSecret: process.env.CLIENT_SECRET as any,
     }),
     DiscordProvider({
-      clientId: process.env.DISCORD_CLIENT_ID,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET,
+      clientId: process.env.DISCORD_CLIENT_ID as any,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET as any,
     }),
     SpotifyProvider({
-      clientId: process.env.SPOTIFY_CLIENT_ID,
-      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+      clientId: process.env.SPOTIFY_CLIENT_ID as any,
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET as any,
     }),
   ],
 });
