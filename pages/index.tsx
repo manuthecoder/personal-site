@@ -3,11 +3,18 @@
 import { AboutMe } from "@/components/AboutMe";
 import { Awards } from "@/components/Awards";
 import { Footer } from "@/components/Footer";
+import Link from "next/link";
+import Popup from "popup-window";
 import {
   AppBar,
   IconButton,
   Box,
+  SwipeableDrawer,
   Button,
+  ListItemButton,
+  Avatar,
+  ListItemSecondaryAction,
+  ListItemText,
   Toolbar,
   Typography,
   useScrollTrigger,
@@ -17,6 +24,149 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Features } from "../components/Features";
+import { useSession, signIn, signOut } from "next-auth/react";
+
+function Guestbook() {
+  const [open, setOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const { data: session } = useSession();
+
+  return (
+    <>
+      <Button
+        color="inherit"
+        onClick={() => setOpen(true)}
+        sx={{
+          borderRadius: 9,
+        }}
+      >
+        Guestbook
+      </Button>
+      <SwipeableDrawer
+        open={open}
+        anchor="bottom"
+        disableSwipeToOpen
+        onOpen={() => setOpen(true)}
+        onClose={() => setOpen(false)}
+        sx={{
+          zIndex: 9999999,
+        }}
+        PaperProps={{
+          sx: {
+            display: "flex",
+            height: "100vh",
+            background: "transparent",
+            alignItems: "center",
+            justifyContent: "center",
+          },
+        }}
+        BackdropProps={{
+          sx: {
+            background: "rgba(0,0,0,0.7)",
+            backdropFilter: "blur(10px)",
+          },
+        }}
+      >
+        <Box
+          sx={{
+            background: "hsl(240,11%,7%)",
+            borderRadius: 5,
+            color: "#fff",
+            width: "600px",
+            maxWidth: "calc(100vw - 20px)",
+          }}
+        >
+          <Box
+            sx={{
+              borderBottom: "1px solid hsl(240,11%,13%)",
+              p: 2,
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Typography variant="h4" className="font-serif">
+              Guestbook
+            </Typography>
+            <IconButton
+              onClick={() => setOpen(false)}
+              color="inherit"
+              sx={{ ml: "auto" }}
+            >
+              <span className="material-symbols-outlined">close</span>
+            </IconButton>
+          </Box>
+          <Box sx={{ p: 3, textAlign: "center", py: session ? 4 : 8 }}>
+            {session ? (
+              <>
+                <Button
+                  sx={{ background: "#fff!important", color: "#000", gap: 2 }}
+                  size="large"
+                  onClick={() => signOut()}
+                >
+                  Sign out
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontSize: "20px" }}
+                  >
+                    logout
+                  </span>
+                </Button>
+                <ListItemButton
+                  sx={{
+                    gap: 2,
+                    cursor: "unset",
+                    background: "hsl(240,11%,15%)!important",
+                    mt: 4,
+                    borderRadius: 3,
+                  }}
+                  disableRipple
+                >
+                  <Avatar src={session.user.image} />
+                  <ListItemText
+                    primary={session.user.name}
+                    secondary={
+                      <span style={{ color: "#aaa" }}>
+                        {session.user.email}
+                      </span>
+                    }
+                  />
+                  <ListItemSecondaryAction>
+                    <Button
+                      variant="contained"
+                      color="inherit"
+                      sx={{
+                        color: "#000",
+                        background: "#fff",
+                        borderRadius: 999,
+                      }}
+                      disableElevation
+                    >
+                      Add me!
+                    </Button>
+                  </ListItemSecondaryAction>
+                </ListItemButton>
+              </>
+            ) : (
+              <Button
+                sx={{ background: "#fff!important", color: "#000", gap: 2 }}
+                size="large"
+                onClick={() => signIn()}
+              >
+                🤩 Add me to the Guestbook!
+                <span
+                  className="material-symbols-outlined"
+                  style={{ fontSize: "20px" }}
+                >
+                  east
+                </span>
+              </Button>
+            )}
+          </Box>
+        </Box>
+      </SwipeableDrawer>
+    </>
+  );
+}
 
 function Header() {
   const ref: any = useRef(null);
@@ -212,28 +362,28 @@ function Navbar() {
       <Toolbar
         sx={{
           justifyContent: "center",
+          color: "#fff",
+          gap: 1,
         }}
       >
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          whileTap={{
-            scale: 0.9,
-            borderRadius: "100%",
+        <Typography
+          sx={{ fontWeight: 500, flexGrow: 1, mr: 1 }}
+          className="font-heading"
+          variant="h6"
+        >
+          @_manu.codes
+        </Typography>
+        <Guestbook />
+        <IconButton
+          color="inherit"
+          onClick={() => {
+            window.navigator.share({
+              url: window.location.href,
+            });
           }}
         >
-          <Typography
-            onClick={() => {
-              window.navigator.share({
-                url: window.location.href,
-              });
-            }}
-            sx={{ fontWeight: 500, flexGrow: 1 }}
-            className="font-heading"
-            variant="h6"
-          >
-            @_manu.codes
-          </Typography>
-        </motion.div>
+          <span className="material-symbols-outlined">share</span>
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
