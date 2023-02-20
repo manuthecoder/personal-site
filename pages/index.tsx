@@ -98,25 +98,12 @@ function Guestbook() {
           <Box sx={{ p: 3, textAlign: "center", py: session ? 4 : 8 }}>
             {session ? (
               <>
-                <Button
-                  sx={{ background: "#fff!important", color: "#000", gap: 2 }}
-                  size="large"
-                  onClick={() => signOut()}
-                >
-                  Sign out
-                  <span
-                    className="material-symbols-outlined"
-                    style={{ fontSize: "20px" }}
-                  >
-                    logout
-                  </span>
-                </Button>
                 <ListItemButton
                   sx={{
                     gap: 2,
                     cursor: "unset",
                     background: "hsl(240,11%,15%)!important",
-                    mt: 4,
+                    mb: 3,
                     borderRadius: 3,
                   }}
                   disableRipple
@@ -145,6 +132,26 @@ function Guestbook() {
                     </Button>
                   </ListItemSecondaryAction>
                 </ListItemButton>
+
+                <Button
+                  sx={{
+                    background: "hsl(240,11%,20%)!important",
+                    color: "#fff",
+                    gap: 2,
+                    px: 2,
+                    borderRadius: 999,
+                  }}
+                  size="small"
+                  onClick={() => signOut()}
+                >
+                  Sign out
+                  <span
+                    className="material-symbols-outlined"
+                    style={{ fontSize: "20px" }}
+                  >
+                    logout
+                  </span>
+                </Button>
               </>
             ) : (
               <Button
