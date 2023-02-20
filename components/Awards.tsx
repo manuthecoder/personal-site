@@ -22,14 +22,14 @@ export function Awards() {
     <Box
       sx={{
         px: { xs: 3, sm: 5 },
-        my: 5,
-        mb: 10,
+        py: 5,
+        pb: 10,
         position: "relative",
         textAlign: "center",
+        background: "hsl(240,11%,18%)",
       }}
       ref={ref}
     >
-      <Divider sx={{ borderColor: "hsla(240,11%,30%,0.5)", my: 5 }} />
       <Typography variant="h3" className="font-serif" sx={{ mb: 2 }}>
         Awards &amp; events I&apos;ve participated in
       </Typography>
@@ -49,7 +49,7 @@ export function Awards() {
               px: 5,
               mb: 2,
               borderRadius: 5,
-              background: "hsla(240,11%,20%, 0.5)",
+              background: "hsla(240,11%,25%, 0.5)",
             }}
           >
             <Typography variant="h6">{event}</Typography>

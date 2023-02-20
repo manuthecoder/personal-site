@@ -5,6 +5,7 @@ import { Awards } from "@/components/Awards";
 import { Footer } from "@/components/Footer";
 import Link from "next/link";
 import Popup from "popup-window";
+import { LoadingButton } from "@mui/lab";
 import {
   AppBar,
   IconButton,
@@ -20,24 +21,37 @@ import {
   Typography,
   useScrollTrigger,
 } from "@mui/material";
-import { Twitter, Github, Instagram, Linkedin } from "feather-icons-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Features } from "../components/Features";
 import { useSession, signIn, signOut } from "next-auth/react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 
 function Guestbook() {
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
   const { data: session } = useSession();
   const { data, error, isLoading } = useSWR("/api/guestbook", () =>
     fetch("/api/guestbook").then((res) => res.json())
   );
 
-  const handleAddClick = () => {
-    fetch("/api/guestbook/add", {
+  const {
+    data: alreadyAdded,
+    error: alreadyAddedError,
+    isLoading: alreadyAddedLoading,
+  } = useSWR("/api/guestbook/verify", () =>
+    fetch("/api/guestbook/verify", {
+      method: "POST",
+      body: JSON.stringify({
+        email: (session.user || { email: "" }).email,
+      }),
+    }).then((res) => res.json())
+  );
+
+  const handleAddClick = async () => {
+    setLoading(true);
+    await fetch("/api/guestbook/add", {
       method: "POST",
       body: JSON.stringify({
         name: session.user.name,
@@ -45,6 +59,9 @@ function Guestbook() {
         image: session.user.image,
       }),
     });
+    await mutate("/api/guestbook");
+    await mutate("/api/guestbook/verify");
+    setLoading(false);
   };
 
   return (
@@ -89,6 +106,9 @@ function Guestbook() {
             borderRadius: 5,
             color: "#fff",
             width: "600px",
+            postition: "relative",
+            maxHeight: "90vh",
+            overflowY: "scroll",
             maxWidth: "calc(100vw - 20px)",
           }}
         >
@@ -97,6 +117,9 @@ function Guestbook() {
               borderBottom: "1px solid hsl(240,11%,13%)",
               p: 2,
               display: "flex",
+              postition: "sticky",
+              top: 0,
+              left: 0,
               alignItems: "center",
             }}
           >
@@ -134,19 +157,40 @@ function Guestbook() {
                     }
                   />
                   <ListItemSecondaryAction>
-                    <Button
+                    <LoadingButton
                       variant="contained"
+                      loading={
+                        (!alreadyAdded && !alreadyAddedError) ||
+                        alreadyAddedLoading ||
+                        loading
+                      }
                       onClick={handleAddClick}
+                      // disabled={alreadyAdded && alreadyAdded.id}
                       color="inherit"
                       sx={{
-                        color: "#000",
+                        ...(!loading && { color: "#000" }),
                         background: "#fff",
+                        ...(loading && {
+                          background: "#fff!important",
+                        }),
+                        ...(alreadyAdded &&
+                          alreadyAdded.id &&
+                          !loading && {
+                            color: "#aaa!important",
+                            background: "rgba(255,255,255,.1)!important",
+                          }),
+                        ...(!alreadyAdded &&
+                          !alreadyAddedError && {
+                            background: "rgba(255,255,255,.1)!important",
+                          }),
                         borderRadius: 999,
                       }}
                       disableElevation
                     >
-                      Add me!
-                    </Button>
+                      {alreadyAdded && alreadyAdded.id
+                        ? "You're in!"
+                        : "Add me!"}
+                    </LoadingButton>
                   </ListItemSecondaryAction>
                 </ListItemButton>
 
@@ -186,12 +230,33 @@ function Guestbook() {
               </Button>
             )}
             <Divider sx={{ borderColor: "hsla(240,11%,30%,0.5)", my: 5 }} />
+            {data && (
+              <Box
+                sx={{
+                  gap: 2,
+                  cursor: "unset",
+                  background: "hsl(240,11%,15%)!important",
+                  mb: 2,
+                  borderRadius: 3,
+                  textAlign: "left",
+                  p: 2.5,
+                  px: 3,
+                }}
+              >
+                <Typography variant="h3" className="font-heading">
+                  {data.length}
+                </Typography>
+                <Typography variant="h6">
+                  people have signed the guestbook!
+                </Typography>
+              </Box>
+            )}
             {!isLoading &&
               data &&
               !error &&
               data.map((user) => (
                 <ListItemButton
-                  key={user}
+                  key={user.email}
                   sx={{
                     gap: 2,
                     cursor: "unset",
@@ -257,7 +322,7 @@ function Header() {
     scrollYProgress,
     [0, 0.2, 0.4, 0.6, 0.8, 1],
     [
-      "inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.3), inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.3)",
+      "inset 0px 0px 0px 5px hsla(240, 11%, 20%, 0.9), inset 0px 0px 0px 5px hsla(240, 11%, 20%, 0.9)",
       "inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4), inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4)",
       "inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4), inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4)",
       "inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4), inset 0px 0px 0px 5px hsla(240, 11%, 15%, 0.4)",
@@ -289,7 +354,7 @@ function Header() {
                 rotate: 45,
                 left: "-100vw",
                 background:
-                  "linear-gradient(90deg, hsla(240, 11%, 10%, 0) 0%, #fff, 50%, hsla(240, 11%, 90%, 0) 100%)",
+                  "linear-gradient(90deg, hsla(240, 11%, 10%, 0) 0%, #b2ff59, 50%, hsla(240, 11%, 90%, 0) 100%)",
                 opacity: 0.8,
                 x: shineX,
               }}
@@ -391,8 +456,8 @@ function Navbar() {
     <AppBar
       position="fixed"
       sx={{
+        transition: "all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
         backdropFilter: "blur(10px)",
-        transition: "all .2s",
         width: "auto",
         top: !trigger ? "-100px" : "20px",
         ...(!trigger && {
@@ -400,7 +465,7 @@ function Navbar() {
         }),
         background: "hsla(240,11%,25%,0.9)",
         borderRadius: 4,
-        m: "20px",
+        m: { xs: "0px", sm: "20px" },
         zIndex: 999999,
         transform: "translateX(-50%)",
         left: "50%",

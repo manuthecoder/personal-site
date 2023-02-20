@@ -12,7 +12,7 @@ body {
   box-sizing: border-box;
 }
 .MuiButton-root {
-  text-transform: none;
+  text-transform: none !important;
 }
 .wrapper {
   height: 200vh; /* Set the height of the wrapper to create a long scrolling page */
@@ -30,13 +30,13 @@ body {
   top: 50%; /* Set the top position to center the container vertically */
   left: 50%; /* Set the left position to center the container horizontally */
   transform: translate(-50%, -50%); /* Center the container using translate */
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .item {
   width: 90vw; /* Set the width of the item */
   height: 500px; /* Set the height of the item */
-  border-radius: 10px;
+  border-radius: 0px;
 }
 
 .container.hidden {
@@ -48,12 +48,12 @@ body {
 
 .intro-content {
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 3px;
+  left: 3px;
   background: var(--bg-color);
-  border-radius: 10px;
-  height: calc(100% - 10px);
-  width: calc(100% - 10px);
+  border-radius: 0px;
+  height: calc(100% - 6px);
+  width: calc(100% - 6px);
   padding: 28px;
 }
 

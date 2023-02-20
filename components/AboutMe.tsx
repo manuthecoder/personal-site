@@ -13,13 +13,13 @@ import { wrap } from "@motionone/utils";
 import { Box, Typography } from "@mui/material";
 
 export function AboutMe() {
-  const ref:any = useRef(null);
+  const ref: any = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["-200px end", "-200px start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [0, 1.06]);
+  const scale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <Box sx={{ zIndex: 999, position: "relative" }}>
@@ -44,10 +44,9 @@ export function AboutMe() {
           },
           "& .progress-bar": {
             height: "41px",
-            ml: -0.5,
-            background: "#000",
+            background: "#558b2f",
             zIndex: -1,
-            mt: "-41px",
+            mt: "-40px",
             top: 0,
             left: 0,
             borderRadius: 1,

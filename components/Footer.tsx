@@ -18,8 +18,7 @@ export function Footer() {
     gap: 2,
   };
   return (
-    <Box sx={{ pb: 5, background: "hsla(240,11%,13%,0.9)" }}>
-      <Divider sx={{ borderColor: "hsla(240,11%,30%,0.5)", my: 5 }} />
+    <Box sx={{ py: 5, background: "hsla(240,11%,13%,0.9)" }}>
       <ParallaxText baseVelocity={0.25}>Manu G &nbsp;&bull;</ParallaxText>
       <ParallaxText baseVelocity={-0.05}>
         Full stack software enthusiast &nbsp;&bull;
@@ -42,6 +41,7 @@ export function Footer() {
           "Codepen|https://codepen.io/manuthecoder",
           "CodeSandbox|https://codesandbox.io/u/ManuTheCoder_1789",
           "DEV.to|https://dev.to/__manucodes",
+          "Email|mailto:manuthecoder@icloud.com",
         ].map((social) => (
           <Button
             key={social}
