@@ -8,6 +8,7 @@ function Item({ project }: any) {
     target: ref,
     offset: ["end end", "start start"],
   });
+  // const shineX = us(scrollYProgress, [0, 1], ["-200vw", "200vw"]);
 
   return (
     <section>
@@ -28,7 +29,7 @@ function Item({ project }: any) {
             width: "auto",
             height: "100%",
             display: "block",
-            padding: 0,
+            pr: 4,
             mr: "auto",
           }}
         >
@@ -36,8 +37,12 @@ function Item({ project }: any) {
             className="progress-bar"
             style={{ scaleX: scrollYProgress }}
           />
-          <Typography variant="h2">{project.name}</Typography>
-          <Typography variant="h6">{project.description}</Typography>
+          <Typography variant="h2" sx={{ my: 2 }}>
+            {project.name}
+          </Typography>
+          <Typography variant="h6" sx={{ fontWeight: 100 }}>
+            {project.description}
+          </Typography>
           <Button
             href={project.url}
             sx={{ gap: 2, borderRadius: 999, mt: 2 }}
@@ -51,13 +56,21 @@ function Item({ project }: any) {
         <Grid
           item
           xs={7}
-          className="item"
           sx={{
-            textAlign: "right",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           <picture>
-            <img src="/screenshots/dysperse.png" height="100%" />
+            <img
+              src={project.logo}
+              style={{
+                width: "200px",
+                height: "200px",
+                borderRadius: "28px",
+              }}
+            />
           </picture>
         </Grid>
       </Grid>
@@ -72,16 +85,14 @@ export function Features() {
       description:
         "Dysperse is a radically different unified productivity platform filled with features such as kanban boards, checklists, agendas, inventory tracking, & more.",
       url: "https://dysperse.com",
+      logo: "/screenshots/dysperse.png",
     },
     {
       name: "Popvote",
-      description: "Popvote is a _____",
+      description:
+        "Popvote is a lightweight polling app for students, teachers, and offices, with content filtering, realtime updates, file uploads, and more.",
       url: "https://popvote.ml",
-    },
-    {
-      name: "IHS FlexTime revamp",
-      description: "Revamp of upcoming FlexTime app for IHS",
-      url: "https://flextime.vercel.app",
+      image: "/screenshots/popvote.png",
     },
   ];
   return (
