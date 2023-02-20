@@ -16,6 +16,10 @@ export default function Document() {
           rel="stylesheet"
         />
         <link
+          rel="shortcut icon"
+          href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/At_Sign_Nimbus.svg/2048px-At_Sign_Nimbus.svg.png"
+        />
+        <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />

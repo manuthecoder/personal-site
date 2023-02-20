@@ -41,7 +41,7 @@ export function Awards() {
         </>,
         "CyberCup 2021 Participant",
       ].map((event, index) => (
-        <motion.div style={{ scale }}>
+        <motion.div style={{ scale }} key={index}>
           <Box
             sx={{
               display: "inline-flex",
