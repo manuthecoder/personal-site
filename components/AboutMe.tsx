@@ -45,7 +45,6 @@ export function AboutMe() {
           "& .progress-bar": {
             height: "41px",
             ml: -0.5,
-            mt: -1,
             background: "#000",
             zIndex: -1,
             mt: "-41px",
