@@ -102,7 +102,7 @@ export function Features() {
       }}
     >
       {projects.map((project) => (
-        <Item project={project} />
+        <Item project={project} key={project.name} />
       ))}
     </Box>
   );
