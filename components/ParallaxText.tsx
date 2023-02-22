@@ -10,14 +10,14 @@ import {
   useAnimationFrame,
 } from "framer-motion";
 import { wrap } from "@motionone/utils";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 interface ParallaxProps {
   children: string;
   baseVelocity: number;
 }
 
-function ParallaxTextItem({ children, baseVelocity = 100 }: ParallaxProps) {
+export function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -62,29 +62,17 @@ function ParallaxTextItem({ children, baseVelocity = 100 }: ParallaxProps) {
    * we have four children (100% / 4). This would also want deriving from the
    * dynamically generated number of children.
    */
+  const styles = {};
+
   return (
     <div className="parallax">
       <motion.div className="scroller" style={{ x }}>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
+        {[...new Array(100)].map((_, i) => (
+          <Typography variant="h3" key={i} sx={styles}>
+            {children}{" "}
+          </Typography>
+        ))}
       </motion.div>
     </div>
-  );
-}
-
-export function ParallaxText() {
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        //   background: "red",
-      }}
-    >
-      <ParallaxTextItem baseVelocity={-2}>About me</ParallaxTextItem>
-      <ParallaxTextItem baseVelocity={2}>What do I do?</ParallaxTextItem>
-    </Box>
   );
 }

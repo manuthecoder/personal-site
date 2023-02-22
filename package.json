@@ -11,9 +11,10 @@
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@mui/lab": "^5.0.0-alpha.120",
     "@mui/material": "^5.11.9",
     "@next/font": "13.1.6",
-    "@types/node": "18.14.0",
+    "@prisma/client": "^4.10.1",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
     "eslint": "8.34.0",
@@ -22,8 +23,29 @@
     "framer-motion": "^9.0.4",
     "motion": "^10.15.5",
     "next": "13.1.6",
+    "next-auth": "^4.19.2",
+    "popup-window": "^1.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "4.9.5"
-  }
+    "swr": "^2.0.3"
+  },
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "next.config.js",
+  "devDependencies": {
+    "@types/node": "^18.14.0",
+    "prisma": "^4.10.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manuthecoder/personal-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manuthecoder/personal-site/issues"
+  },
+  "homepage": "https://github.com/manuthecoder/personal-site#readme"
 }
