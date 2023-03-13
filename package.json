@@ -21,7 +21,7 @@
     "framer-motion": "^9.0.4",
     "motion": "^10.15.5",
     "next": "13.1.6",
-    "next-auth": "^4.19.2",
+    "next-auth": "^4.20.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "swr": "^2.0.3"
