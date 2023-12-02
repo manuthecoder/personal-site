@@ -4,9 +4,9 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/about',
-        destination: '/',
-        permanent: true,
+        source: '/:path*',
+        destination: 'https://manuthecoder.pages.dev',
+        permanent: false,
       },
     ]
   },
